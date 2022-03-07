@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <link rel="stylesheet" href="{% static 'filter.js' %}">
+    <title>Dashboard</title>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="header">
+            <h1>Hello {{request.session.user}}</h1>
+            <!-- {% for user in all_golf_by_user %}
+            <a href="/dashboard/user_profile/{{ user.id }}">Profile</a>
+            {% endfor %} -->
+            <a href="/logout">Logout</a> <a href="/dashboard/newgolf">Create Golf Tomorrow Request</a>
+        </div>
+        <div class="body">
+            <div class="col-1">
+                <table class="table table-dark">
+                    <thead>
+                        <tr>
+                            <th col-index = 1>Golf Title</th>
+                            <th col-index = 2>Location
+                                <select class="table-filter">
+                                    <option value="all"></option>
+                                </select>
+                            </th>
+                            <th col-index = 3>Date
+                                <select class="table-filter">
+                                    <option value="all"></option>
+                                </select>
+                            </th>
+                            </th>
+                            <th col-index = 4>Time</th>
+                            </th>
+                            <th col-index = 5>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for golf in all_golf_by_user %}
+                        {% if golf.my_golf_group == False %}
+                            <tr>
+                                <td>{{ golf.golf_title }}</td>
+                                <td>{{ golf.location }}</td>
+                                <td>{{  golf.date  }}</td>
+                                <td>{{  golf.time  }}</td>
+                                <td><a href="/view/{{ golf.id }}">View</a> | <a href="/dashboard/add_to_my_golf/{{ golf.id }}">Join</a> | <a href="/edit/{{ golf.id }}">edit</a> | <a href="/dashboard/cancel/{{ golf.id }}" role="button" class="cancel_button">cancel</a></td>
+                            </tr>
+                        {% endif %}
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <script>
+                    window.onload = () => {
+                        console.log(document.querySelector("table table-dark > tbody > tr:nth-child(2) > td:nth-child(3)").innerHTML);
+                    };
+
+                    getuniquevaluesfromcolumn()
+                </script>
+            </div>
+            <div class="col-2">
+                <table class="table table-dark">
+                    <thead>
+                        <tr>
+                            <th>My Golf Sessions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for golf in all_golf_by_user %}
+                        {% if golf.my_golf_group == True %}
+                        {% if golf.assigned_golfer == request.session.email %}
+                        <tr>
+                            <td>{{ golf.golf_title }} | <a href="/view/{{ golf.id }}">View</a> | <a href="/dashboard/done/{{ golf.id }}" role="button" class="cancel_button">Done</a></td>
+                        </tr>
+                        {% endif %}
+                        {% endif %}
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>    
+</body>
+</html>

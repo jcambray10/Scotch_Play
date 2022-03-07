@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Profile</title>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="header">
+            <h1>Profile</h1>
+            <a href="/dashboard">Golf Tomorrow Dashboard</a>  <a href="/logout">Logout</a>   
+        </div>
+        <div class="body">
+            {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+            <form action="/dashboard/user_profile/edit/{{ profile.id }}/update" method="post">
+                {% csrf_token %}
+                <!-- <div class="form-group">
+                    <label for="golf_title">Golf Tomorrow Title</label>
+                    <input type="text" name="golf_title" id="golf_title" class="form-control" value="{{ profile.golf_title }}" required>
+                </div> -->
+                <div class="form-group">
+                    <label for="favorite_golfer">Favorite Golfer</label>
+                    <input type="text" name="favorite_golfer" id="favorite_golfer" class="form-control" class="form-control" value="{{ profile.favorite_golfer }}" required>
+                </div>
+                <div class="form-group">
+                    <label for="handicap">Handicap</label>
+                    <input type="text" name="handicap" id="handicap" class="form-control" value="{{ profile.handicap }}" required>
+                </div>
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <input type="text" name="description" id="description" class="form-control" value="{{ profile.description }}" cols="30" {{ profile.description }} required>
+                </div>
+                <button class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

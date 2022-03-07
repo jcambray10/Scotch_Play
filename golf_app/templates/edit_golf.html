@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Golf Tomorrow Request</title>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="header">
+            <h1>Edit Your Golf Tomorrow Request</h1>
+            <a href="/dashboard">Golf Tomorrow Dashboard</a>  <a href="/logout">Logout</a>
+        </div>
+        <div class="body">
+            {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+            </ul>
+            {% endif %}
+            <form action="/edit/{{ golf.id }}/update" method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="golf_title">Golf Tomorrow Title</label>
+                    <input type="text" name="golf_title" id="golf_title" class="form-control" value="{{ golf.golf_title }}" required>
+                </div>
+                <div class="form-group">
+                    <label for="location">Location</label>
+                    <input type="text" name="location" id="location" class="form-control" value="{{ golf.location }}" required>
+                </div>
+                <div class="form-group">
+                    <label for="date">Date</label>
+                    <input type="text" name="date" id="date" class="form-control" value="{{ golf.date }}" required>
+                </div>
+                <div class="form-group">
+                    <label for="time">Time Frame</label>
+                    <input type="text" name="time" id="time" class="form-control" value="{{ golf.time }}" required>
+                </div>
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <input type="textarea" name="description" id="description" value="{{ golf.description }}" cols="30" {{ golf.description }} rows="10" class="form-control" required></textarea>
+                </div>
+                <button class="btn btn-primary">Submit</button>
+            </form>
+    </div>    
+</body>
+</html>

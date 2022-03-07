@@ -1,0 +1,43 @@
+* { 
+    margin: 5px;
+    padding: 5px;
+}
+
+.wrapper {
+    width: 1200px;
+    height: auto;
+    background-color: white;
+    margin: 0px auto;
+}
+.header {
+    display: flex;
+    justify-content: space-between;
+}
+.body,
+li {
+    border: 2px solid black;
+}
+ul {
+    display: flex;
+    justify-content: space-evenly;
+    list-style: none;
+}
+.row {
+    display: flex;
+    justify-content: flex;
+}
+.col-1 {
+    height: 500px;
+    width: 650px;
+    display: inline-block;
+}
+.col-2 {
+    height: 500px;
+    width: 350px;
+    display: inline-block;
+    vertical-align: top;
+}
+.nav {
+    display: flex;
+    justify-content: flex-end;
+}

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <title>View Golf Tomorrow Request</title>
+</head>
+<body>
+    <div class="container">
+        <div class="nav">
+            <h1>View of Golf Tomorrow Request</h1>
+            <a href="/dashboard">Golf Tomorrow Dashboard</a>  <a href="/logout">Logout</a>
+        </div>
+    </div>
+    <div class="view_golf_tomorrow_request">
+        {% for golf in all_golf_by_user %}
+        <h1>{{golf.golf_title}}</h1>
+        <ul style="list-style-type: none">
+            <li>location: {{golf.location}}</li>
+            <li>{{golf.date}}</li>
+            <li>{{golf.time}}</li>
+            <li>{{golf.description}}</li>
+            <li>Posted by: {{ golf.first_name }}{{request.session.user}} {{ golf.last_name }}{{request.session.user_last_name }}</li>
+        </ul>
+        <a href="/dashboard/add_to_my_golf/{{ golf.id }}">Join</a> <a href="/dashboard/done/{{ golf.id }}" role="button" class="cancel_button">Done</a></td>
+        {% endfor %}
+    </div>
+</body>
+</html>
